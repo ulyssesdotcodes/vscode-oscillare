@@ -1,0 +1,60 @@
+{
+    "name": "vscode-oscillare",
+    "displayName": "vscode-oscillare",
+    "description": "",
+    "version": "0.0.2",
+    "publisher": "ulyssesp",
+    "engines": {
+        "vscode": "^1.21.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "onLanguage:oscillare",
+        "onCommand:extension.startOscillare",
+        "onCommand:extension.stopOscillare",
+        "onCommand:extension.oscillareSend"
+    ],
+    "main": "./out/extension",
+    "contributes": {
+        "languages": [{
+            "id": "oscillare",
+            "extensions": [ ".osc" ],
+            "aliases": [ "Osillare", "osc" ],
+            "firstLine": "^#!/.*\\bpython[0-9.-]*\\b",
+            "configuration": "./language-configuration.json"
+        }],
+        "commands": [{
+            "command": "extension.startOscillare",
+            "title": "Start Oscillare"
+        }, {
+            "command": "extension.oscillareSend",
+            "title": "Send Oscillare"
+        }, {
+            "command": "extension.stopOscillare",
+            "title": "Stop Oscillare"
+        }],
+        "keybindings":[
+            {
+                "command": "extension.oscillareSend",
+                "key": "ctrl+enter",
+                "when": "editorLangId == oscillare"
+            }
+        ]
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "test": "npm run compile && node ./node_modules/vscode/bin/test"
+    },
+    "devDependencies": {
+        "typescript": "^2.6.1",
+        "vscode": "^1.1.6",
+        "tslint": "^5.8.0",
+        "@types/node": "^7.0.43",
+        "@types/mocha": "^2.2.42"
+    }
+}
